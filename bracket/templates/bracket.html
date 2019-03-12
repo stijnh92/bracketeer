@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Brackie</h1>
+    <main id="tournament" class="container">
+        <!-- LEFT SIDE -->
+{#        {{ range .gamesLeft }}#}
+            <ul class="round p-3">
+                <li class="spacer"></li>
+{#                {{ range . }}#}
+{#                    {{ template "card" . }}#}
+{#                    <li class="spacer"></li>#}
+{#                {{ end }}#}
+            </ul>
+{#        {{ end }}#}
+
+        <!-- FINAL -->
+        <ul class="round p-5">
+{#            {{ template "card" .final }}#}
+        </ul>
+
+
+        <!-- RIGHT SIDE -->
+{#        {{ range .gamesRight }}#}
+            <ul class="round p-3">
+                <li class="spacer">&nbsp;</li>
+{#                {{ range . }}#}
+{#                    {{ template "card" . }}#}
+{#                    <li class="spacer">&nbsp;</li>#}
+{#                {{ end }}#}
+            </ul>
+{#        {{ end }}#}
+
+    </main>
+{% endblock %}

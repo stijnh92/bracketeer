@@ -1,0 +1,203 @@
+/*
+ *  Flex Layout Specifics
+*/
+
+body {
+    background-color: #343a40;
+    font-family: 'Titillium Web', sans-serif;
+    color: white;
+
+}
+.fa-spin-hover:hover {
+    animation: fa-spin 2s infinite linear;
+    color: rgb(250,131,32);
+}
+@-webkit-keyframes fa-spin{
+    0%{
+        -webkit-transform:rotate(0deg);transform:rotate(0deg)
+    }
+    100%{
+        -webkit-transform:rotate(359deg);transform:rotate(359deg)
+    }
+}
+@keyframes fa-spin{
+    0%{
+        -webkit-transform:rotate(0deg);transform:rotate(0deg)
+    }
+    100%{
+        -webkit-transform:rotate(359deg);transform:rotate(359deg)
+    }
+}
+
+main{
+    display:flex;
+    flex-direction:row;
+    color: black;
+}
+
+h1 {
+    color: white;
+}
+
+.round{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    list-style:none;
+    padding:0;
+}
+
+.round .spacer{ flex-grow:1; }
+.round .spacer:first-child,
+.round .spacer:last-child{ flex-grow:.5; }
+
+.round .game-spacer{
+    flex-grow:1;
+}
+
+.round .game-spacer-east{
+    flex-grow:1;
+}
+
+/*
+ *  General Styles
+*/
+body{
+    font-size:small;
+    padding:10px;
+    line-height:1.4em;
+}
+
+li.game{
+    padding-left:20px;
+}
+
+li.game-east{
+    padding-right:20px;
+}
+
+li.game.winner{
+    font-weight:bold;
+}
+li.game-east.winner{
+    font-weight:bold;
+}
+
+li.game-east span{
+    float:right;
+    margin-right:5px;
+}
+
+
+li.game span.east{
+    float:left;
+    margin-left:5px;
+}
+
+li.game span.west{
+    float:right;
+    margin-left:5px;
+}
+
+li.game-east span.east{
+    float:left;
+    /*margin-left:5px;*/
+}
+
+li.game span.west {
+    margin-right: 5px;
+}
+
+
+li.game-top{
+    /*border-bottom:1px solid #aaa; */
+}
+
+li.game-spacer{
+    /*border-right:1px solid #aaa;*/
+    min-height:40px;
+}
+
+li.game-spacer-east{
+    /*border-left:1px solid #aaa;*/
+    min-height:40px;
+}
+
+li.game-bottom{
+    /*border-top:1px solid #aaa;*/
+}
+
+img {
+    max-width: 50px;
+    max-height: 50px;
+    display: block;
+    margin: auto;
+}
+
+.team {
+    width: 180px;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 2px solid black;
+    background-color: #f3f3f2;
+}
+
+.logo {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 10px 10px;
+}
+
+.score {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    border: 0 solid black;
+    padding: 10px 5px 10px 5px;
+}
+
+.score-left {
+    border-right-width: 5px;
+}
+
+.score-right {
+    border-left-width: 5px;
+}
+
+.score>span {
+    text-align: center;
+    font-size: 30px;
+    height: 60px;
+    line-height: 60px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.disabled {
+    color: darkgray;
+}
+
+.short {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.header {
+    color: white;
+    text-align: center;
+}
+
+a {
+    color: white;
+}
+
+.badge {
+    display: block;
+    text-align: center;
+}

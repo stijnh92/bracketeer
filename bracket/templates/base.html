@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+<head>
+    <title>{% block title %}Bracketeer{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/fontawesome-all.min.css" %}">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+
+    <script src="{% static "js/jquery-3.3.1.min.j" %}"></script>
+    <script src="{% static "js/bootstrap.min.j" %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-basketball-ball fa-spin-hover"></i> NBA Bracketeer
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/groups">Groups</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/leaderboard">Leaderboard</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="/groups" method="GET">
+                <input class="form-control mr-sm-2" type="search" placeholder="Find a group..." aria-label="Search" name="group">
+                <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

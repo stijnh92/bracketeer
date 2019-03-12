@@ -1,0 +1,39 @@
+<html>
+    {{ template "header" }}
+
+    <body>
+        {{ template "navbar" }}
+
+        <div class="container">
+            <h1>Users of {{ .group.Name }}</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Points</th>
+                    <th scope="col">Champion Prediction</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {{ range .group.Users}}
+                <tr>
+                    <td>
+                        <a href="/bracket/{{ .ID }}"> {{ .Name }} </a>
+                    </td>
+                    <td>
+                        {{ .Points .GroupID }}
+                    </td>
+                    <td>
+                        {{ with .GetMatchupWinner "F" }}
+                            {{ .Name }}
+                        {{ end }}
+                    </td>
+                </tr>
+                {{ end }}
+                </tbody>
+            </table>
+        </div>
+
+    </body>
+</html>

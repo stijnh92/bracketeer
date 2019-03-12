@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Groups</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Members</th>
+                <th scope="col">Ask to join!</th>
+            </tr>
+            </thead>
+
+            <tbody>
+{#            {{ range .groups}}#}
+            <tr>
+                <td>
+{#                    <a href="/group/{{ .ID }}"> {{ .Name }} </a>#}
+                </td>
+                <td>
+{#                    {{ .MemberCount }}#}
+                </td>
+                <td>
+                    <i class="fas fa-users"></i> public
+                </td>
+            </tr>
+{#            {{ end }}#}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
