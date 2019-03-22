@@ -8,7 +8,7 @@ class Team(models.Model):
 
 
 class MatchUp(models.Model):
-    home_team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    away_team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    home_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='home_team')
+    away_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='away_team')
     home_score = models.IntegerField()
     away_score = models.IntegerField()
