@@ -18,6 +18,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('groups', views.groups),
+    path('groups', views.group_list),
+    path('group/<int:group_id>', views.group_detail),
     path('leaderboard', views.leaderboard),
 ]

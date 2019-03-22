@@ -13,19 +13,19 @@
             </thead>
 
             <tbody>
-{#            {{ range .groups}}#}
-            <tr>
-                <td>
-{#                    <a href="/group/{{ .ID }}"> {{ .Name }} </a>#}
-                </td>
-                <td>
-{#                    {{ .MemberCount }}#}
-                </td>
-                <td>
-                    <i class="fas fa-users"></i> public
-                </td>
-            </tr>
-{#            {{ end }}#}
+                {% for group in group_list %}
+                    <tr>
+                        <td>
+                            <a href="/group/{{ group.id }}"> {{ group.name }} </a>
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <i class="fas fa-users"></i> public
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

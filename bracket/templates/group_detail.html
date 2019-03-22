@@ -1,11 +1,8 @@
-<html>
-    {{ template "header" }}
+{% extends 'base.html' %}
 
-    <body>
-        {{ template "navbar" }}
-
-        <div class="container">
-            <h1>Users of {{ .group.Name }}</h1>
+{% block content %}
+    <div class="container">
+        <h1>Users of {{ group.name }}</h1>
             <table class="table">
                 <thead>
                 <tr>
@@ -16,24 +13,20 @@
                 </thead>
 
                 <tbody>
-                {{ range .group.Users}}
-                <tr>
-                    <td>
-                        <a href="/bracket/{{ .ID }}"> {{ .Name }} </a>
-                    </td>
-                    <td>
-                        {{ .Points .GroupID }}
-                    </td>
-                    <td>
-                        {{ with .GetMatchupWinner "F" }}
-                            {{ .Name }}
-                        {{ end }}
-                    </td>
-                </tr>
-                {{ end }}
+                    {% for user in group.user_set.all %}
+                        <tr>
+                            <td>
+                                {{  user.username }}
+                            </td>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                bla
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
-        </div>
-
-    </body>
-</html>
+    </div>
+{% endblock %}
