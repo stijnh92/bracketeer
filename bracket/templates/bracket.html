@@ -6,22 +6,22 @@
         {% for round in bracket_items_left %}
             <ul class="round p-3">
                 <li class="spacer"></li>
-                {% for game in round %}
-                    {% include "matchup.html" with game=game.match_up %}
+                {% for match_up in round %}
+                    {% include "matchup.html" with match_up=match_up %}
                     <li class="spacer"></li>
                 {% endfor %}
             </ul>
         {% endfor %}
 
         <ul class="round p-5">
-             {% include "matchup.html" with game=final_bracket_item.match_up %}
+             {% include "matchup.html" with match_up=match_up %}
         </ul>
 
         {% for round in bracket_items_right %}
             <ul class="round p-3">
                 <li class="spacer"></li>
-                {% for game in round %}
-                    {% include "matchup.html" with game=game.match_up %}
+                {% for match_up in round %}
+                    {% include "matchup.html" with match_up=match_up %}
                     <li class="spacer"></li>
                 {% endfor %}
             </ul>

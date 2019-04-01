@@ -2,43 +2,46 @@
 
 <div class="card" style="width: 120px;">
     <ul class="list-group list-group-flush">
+        {% with match_up.match_up as game %}
 
-        <li class="list-group-item p-0">
+            <li class="list-group-item p-0">
 
-            {%  if game.user %}
-                <span class="badge badge-pill badge-success">1</span>
-            {% endif %}
+                {%  if match_up.user %}
+                    <span class="badge badge-pill badge-success"> {{ match_up.points }}</span>
+                {% endif %}
 
-            {% if game %}
-                <img src="{% static 'img/'|add:game.home_team.logo %}"
-                     alt="{{ game.home_team.short}}"
-                     style="{% if game.home_team_eliminated %} opacity: 0.30; {% endif %}"
-                />
-            {% else %}
-                <div class="text-center bold">TBD</div>
-            {% endif %}
-        </li>
+                {% if game %}
+                    <img src="{% static 'img/'|add:game.home_team.logo %}"
+                         alt="{{ game.home_team.short}}"
+                         style="{% if game.home_team_eliminated %} opacity: 0.30; {% endif %}"
+                    />
+                {% else %}
+                    <div class="text-center bold">TBD</div>
+                {% endif %}
+            </li>
 
-        <li class="list-group-item p-1 text-center">
-            <span class="{% if game.home_team_advanced %}bold{% endif %}">
-                {{ game.home_team.short}} {{ game.home_score }}
-            </span>
-            -
-            <span class="{% if game.away_team_advanced %}bold{% endif %}">
-                 {{ game.away_team.short}} {{ game.away_score }}
-            </span>
-        </li>
+            <li class="list-group-item p-1 text-center">
+                <span class="{% if game.home_team_advanced %}bold{% endif %}">
+                    {{ game.home_team.short}} {{ game.home_score }}
+                </span>
+                -
+                <span class="{% if game.away_team_advanced %}bold{% endif %}">
+                     {{ game.away_team.short}} {{ game.away_score }}
+                </span>
+            </li>
 
-        <li class="list-group-item p-0">
-            {% if game %}
-                <img src="{% static 'img/'|add:game.away_team.logo %}"
-                     alt="{{ game.away_team.short}}"
-                     style="{% if game.away_team_eliminated %} opacity: 0.30; {% endif %}"
-                />
-            {% else %}
-                <div class="text-center bold">TBD</div>
-            {% endif %}
-        </li>
+            <li class="list-group-item p-0">
+                {% if game %}
+                    <img src="{% static 'img/'|add:game.away_team.logo %}"
+                         alt="{{ game.away_team.short}}"
+                         style="{% if game.away_team_eliminated %} opacity: 0.30; {% endif %}"
+                    />
+                {% else %}
+                    <div class="text-center bold">TBD</div>
+                {% endif %}
+            </li>
+
+        {% endwith %}
 
     </ul>
 </div>
