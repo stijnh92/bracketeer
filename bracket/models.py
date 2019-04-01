@@ -27,6 +27,9 @@ class BracketManager(models.Manager):
             'final_bracket_item': final_bracket_item
         }
 
+    def get_user_bracket(self, user):
+        return {}
+
 
 class BracketItem(models.Model):
     match_up = models.ForeignKey(MatchUp, on_delete=models.CASCADE)

@@ -20,5 +20,6 @@ urlpatterns = [
     path('', views.index),
     path('groups', views.group_list),
     path('group/<int:group_id>', views.group_detail),
+    path('bracket/<int:user_id>', views.bracket),
     path('leaderboard', views.leaderboard),
 ]

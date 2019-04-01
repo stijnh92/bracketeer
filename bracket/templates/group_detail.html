@@ -16,7 +16,7 @@
                     {% for user in group.user_set.all %}
                         <tr>
                             <td>
-                                {{  user.username }}
+                                <a href="/bracket/{{ user.id }}"> {{ user.username }} </a>
                             </td>
                             <td>
                                 1
