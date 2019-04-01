@@ -1,35 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Bracket</h1>
+
     <main id="tournament" class="container">
-        <!-- LEFT SIDE -->
-{#        {{ range .gamesLeft }}#}
+        {% for round in bracket_items_left %}
             <ul class="round p-3">
                 <li class="spacer"></li>
-{#                {{ range . }}#}
-{#                    {{ template "card" . }}#}
-{#                    <li class="spacer"></li>#}
-{#                {{ end }}#}
+                {% for game in round %}
+                    {% include "matchup.html" with game=game.match_up %}
+                    <li class="spacer"></li>
+                {% endfor %}
             </ul>
-{#        {{ end }}#}
+        {% endfor %}
 
-        <!-- FINAL -->
         <ul class="round p-5">
-{#            {{ template "card" .final }}#}
+             {% include "matchup.html" with game=final_bracket_item.match_up %}
         </ul>
 
-
-        <!-- RIGHT SIDE -->
-{#        {{ range .gamesRight }}#}
+        {% for round in bracket_items_right %}
             <ul class="round p-3">
-                <li class="spacer">&nbsp;</li>
-{#                {{ range . }}#}
-{#                    {{ template "card" . }}#}
-{#                    <li class="spacer">&nbsp;</li>#}
-{#                {{ end }}#}
+                <li class="spacer"></li>
+                {% for game in round %}
+                    {% include "matchup.html" with game=game.match_up %}
+                    <li class="spacer"></li>
+                {% endfor %}
             </ul>
-{#        {{ end }}#}
+        {% endfor %}
 
     </main>
 {% endblock %}

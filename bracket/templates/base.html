@@ -10,8 +10,8 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/fontawesome-all.min.css" %}">
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 
-    <script src="{% static "js/jquery-3.3.1.min.j" %}"></script>
-    <script src="{% static "js/bootstrap.min.j" %}"></script>
+    <script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
 
     <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
 </head>
@@ -42,8 +42,8 @@
         </div>
     </nav>
 
-    <div id="content">
+{#    <div id="content">#}
         {% block content %}{% endblock %}
-    </div>
+{#    </div>#}
 </body>
 </html>

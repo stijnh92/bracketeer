@@ -1,9 +1,12 @@
 from django.shortcuts import render
-from django.contrib.auth.models import Group, User
+from django.contrib.auth.models import Group
+
+from bracket.models import BracketItem
 
 
 def index(request):
-    return render(request, 'bracket.html')
+    bracket = BracketItem.objects.get_master_bracket()
+    return render(request, 'bracket.html', bracket)
 
 
 def group_list(request):

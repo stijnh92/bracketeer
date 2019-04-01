@@ -10,5 +10,17 @@ class Team(models.Model):
 class MatchUp(models.Model):
     home_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='home_team')
     away_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='away_team')
-    home_score = models.IntegerField()
-    away_score = models.IntegerField()
+    home_score = models.IntegerField(default=0)
+    away_score = models.IntegerField(default=0)
+
+    def home_team_eliminated(self):
+        return self.away_score == 4
+
+    def home_team_advanced(self):
+        return self.home_score == 4
+
+    def away_team_eliminated(self):
+        return self.home_score == 4
+
+    def away_team_advanced(self):
+        return self.away_score == 4
