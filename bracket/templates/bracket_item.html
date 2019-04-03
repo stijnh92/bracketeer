@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form action="/bracket_item" method="post">
+    {% for child_form in form_set.forms %}
+        {% csrf_token %}
+        {{ child_form }}
+
+        {% if child_form.nested %}
+            {{ child_form.nested }}
+        {% endif %}
+        <input type="submit" value="Submit">
+    {% endfor %}
+    </form>
+
+{% endblock %}

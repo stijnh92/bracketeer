@@ -1,7 +1,10 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.models import Group, User
 
+from bracket.forms import BracketItemFormSet
 from bracket.models import BracketItem
+from nba.models import MatchUp
 
 
 def index(request):
@@ -28,3 +31,33 @@ def bracket(request, user_id):
 
 def leaderboard(request):
     return render(request, 'leaderboard.html')
+
+
+def bracket_item(request):
+    # if this is a POST request we need to process the form data
+    match_up = MatchUp()
+
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form_set = BracketItemFormSet(request.POST, instance=match_up)
+
+        print(request.POST)
+
+        # check whether it's valid:
+        if form_set.is_valid():
+            print(form_set.cleaned_data)
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/bracket_item')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+
+        form_set = BracketItemFormSet(instance=match_up)
+
+        print(form_set)
+
+    return render(request, 'bracket_item.html', {
+        'form_set': form_set
+    })

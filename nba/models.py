@@ -6,6 +6,9 @@ class Team(models.Model):
     short = models.CharField(max_length=3)
     logo = models.CharField(max_length=10)
 
+    def __str__(self):
+        return f'{self.short} ({self.name})'
+
 
 class MatchUp(models.Model):
     home_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='home_team')
