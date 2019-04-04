@@ -204,11 +204,17 @@ a {
 
 @media (min-width: 1200px){
     .container {
-        max-width: 1140px;
-        min-height: 650px;
+        max-width: 1400px;
+        min-height: 700px;
     }
 }
 
 .score__team {
     display: inline;
+}
+
+.score-select {
+    width: auto;
+    display: inline;
+    padding: 0 0;
 }

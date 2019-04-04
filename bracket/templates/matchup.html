@@ -31,9 +31,9 @@
                 <div class="score__team" data-bracket-index="{{ match_up.index }}"
                      data-bracket-side="{{ match_up.side }}" data-location="home">
                     <span class="{% if game.home_team_advanced %}bold{% endif %}">
-                        {{ game.home_team.short }}
+                        {{ game.home_team.short|default:"TBD" }}
                     </span>
-                    <select class="score-select">
+                    <select class="score-select form-control">
                         <option>0</option>
                         <option>1</option>
                         <option>2</option>
@@ -45,9 +45,9 @@
                 <div class="score__team" data-bracket-index="{{ match_up.index }}"
                      data-bracket-side="{{ match_up.side }}" data-location="away">
                     <span class="{% if game.away_team_advanced %}bold{% endif %}">
-                         {{ game.away_team.short }}
+                         {{ game.away_team.short|default:"TBD" }}
                     </span>
-                    <select class="score-select">
+                    <select class="score-select form-control">
                         <option>0</option>
                         <option>1</option>
                         <option>2</option>
