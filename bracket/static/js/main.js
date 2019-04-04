@@ -18,21 +18,53 @@ $(document).ready(function () {
         "R7": {"side": "M", "index": 1, "location": "away"}
     };
 
+    var bracketUpdate = {};
+
     $(".score-select").change(function () {
-        var winner = (parseInt)($(this).val()) === 4;
-        if (!winner) {
+        var bracketSide = $(this).parent().data('bracketSide');
+        var bracketIndex = $(this).parent().data('bracketIndex');
+
+        var homeTeamScoreDiv = getTeamScore(bracketSide, bracketIndex, 'home');
+        var awayTeamScoreDiv = getTeamScore(bracketSide, bracketIndex, 'away');
+
+        var homeTeamShort = $.trim(homeTeamScoreDiv.find('span:first').html());
+        var awayTeamShort = $.trim(awayTeamScoreDiv.find('span:first').html());
+
+        var homeTeamScore = parseInt(homeTeamScoreDiv.find('select:first').val());
+        var awayTeamScore = parseInt(awayTeamScoreDiv.find('select:first').val());
+
+        bracketUpdate[bracketSide + bracketIndex] = {
+            'home': {
+                'team': homeTeamShort,
+                'score': homeTeamScore
+            },
+            'away': {
+                'team': awayTeamShort,
+                'score': awayTeamScore
+            }
+        };
+
+        console.log(bracketUpdate);
+
+
+        var winningTeamLocation = null;
+        if (homeTeamScore === 4) {
+            winningTeamLocation = 'home';
+        } else if (awayTeamScore === 4) {
+            winningTeamLocation = 'away';
+        }
+
+
+        if (winningTeamLocation === null || homeTeamScore == awayTeamScore) {
+            console.log('no winner');
             return;
         }
 
-        // TODO: check the other team has not '4' set as value.
-        // TODO: hold the details so we can post it on save!
 
-        var bracketSide = $(this).parent().data('bracketSide');
-        var bracketIndex = $(this).parent().data('bracketIndex');
-        var location = $(this).parent().data('location');
 
-        var winningTeamDiv = getTeamCard(bracketSide, bracketIndex, location);
-        var winningTeamScore = getTeamScore(bracketSide, bracketIndex, location);
+
+        var winningTeamDiv = getTeamCard(bracketSide, bracketIndex, winningTeamLocation);
+
 
         // Get the location of the next round and set the winning team's image.
         var nextRound = bracketMappingNextRound[bracketSide + bracketIndex];
@@ -41,7 +73,7 @@ $(document).ready(function () {
         cardTeamNextRound.html(img);
 
         var scoreTeamNextRound = getTeamScore(nextRound['side'], nextRound['index'], nextRound['location']);
-        scoreTeamNextRound.find('span:first').html( winningTeamScore.find('span:first').html());
+        scoreTeamNextRound.find('span:first').html('bla');
     });
 
     function getTeamCard(side, index, location) {
