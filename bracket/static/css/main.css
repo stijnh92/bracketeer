@@ -208,3 +208,7 @@ a {
         min-height: 650px;
     }
 }
+
+.score__team {
+    display: inline;
+}
