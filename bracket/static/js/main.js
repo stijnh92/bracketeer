@@ -58,16 +58,15 @@ $(document).ready(function () {
         console.log(data);
         $.ajax({
             type: 'POST',
-            url: 'save-bracket',
+            url: '/save-bracket',
             data: JSON.stringify(bracketUpdate),
             contentType:"application/json; charset=utf-8",
             dataType: 'json',
             headers: {
                 'X-CSRFToken': getCookie('csrftoken')
-            },
-            success: function (data) {
-                console.log(data);
             }
+        }).done(function() {
+            window.location.href = "/bracket/1";
         });
     });
 

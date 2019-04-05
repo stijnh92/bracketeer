@@ -20,7 +20,7 @@ urlpatterns = [
     path('', views.index),
     path('groups', views.group_list),
     path('group/<int:group_id>', views.group_detail),
-    path('bracket/<int:user_id>', views.bracket),
+    path('bracket/<int:user_id>', views.bracket, name='user-bracket'),
     path('leaderboard', views.leaderboard),
     path('save-bracket', views.save_bracket),
 ]

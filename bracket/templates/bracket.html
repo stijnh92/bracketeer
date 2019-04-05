@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <a href="#" class="btn btn-primary">Edit</a>
-    <a href="#" class="btn btn-success save-button">Save changes</a>
+    {% if edit_mode %}
+        <a href="#" class="btn btn-success save-button">Save changes</a>
+    {% else %}
+        <a href="{% url 'user-bracket' 1 %}?edit=1" class="btn btn-primary">Edit</a>
+    {% endif %}
 
     <main id="tournament" class="container">
         {% for round in bracket_items_left %}

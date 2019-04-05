@@ -1,17 +1,15 @@
 import json
 
+from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.models import Group, User
 
-from bracket.forms import BracketItemFormSet
 from bracket.models import BracketItem
-from nba.models import MatchUp
 
 
 def index(request):
     bracket = BracketItem.objects.get_bracket()
-    print(bracket)
     return render(request, 'bracket.html', bracket)
 
 
@@ -28,6 +26,7 @@ def group_detail(request, group_id):
 def bracket(request, user_id):
     user = User.objects.get(pk=user_id)
     bracket = BracketItem.objects.get_bracket(user)
+    bracket['edit_mode'] = request.GET.get('edit', False)
     return render(request, 'bracket.html', bracket)
 
 
@@ -37,8 +36,11 @@ def leaderboard(request):
 
 def save_bracket(request):
     data = json.loads(request.body)
+
+    user = request.user
+    user = authenticate(username='stijn', password='W0nderfu!')
+
     for key, match_up in data.items():
-        print(key)
-        print(match_up)
+        BracketItem.objects.set_match_up(user, key[1], key[0], match_up)
 
     return JsonResponse({'status': 'OK'})

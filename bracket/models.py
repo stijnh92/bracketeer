@@ -28,7 +28,13 @@ class BracketManager(models.Manager):
         try:
             return self.model.objects.get(index=index, side=side, user=user)
         except BracketItem.DoesNotExist:
-            return self.model(index=index, side=side)
+            return self.model(index=index, side=side, user=user)
+
+    def set_match_up(self, user, bracket_side, bracket_index, game):
+        bracket_item = self.get_item(bracket_side, bracket_index, user)
+        match_up = MatchUp.objects.get_or_create(game, user)
+        bracket_item.match_up = match_up
+        bracket_item.save()
 
 
 class BracketItem(models.Model):

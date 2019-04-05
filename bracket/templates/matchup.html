@@ -33,13 +33,20 @@
                     <span class="{% if game.home_team_advanced %}bold{% endif %}">
                         {{ game.home_team.short|default:"TBD" }}
                     </span>
-                    <select class="score-select form-control">
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
+
+                    {% if edit_mode %}
+                        <select class="score-select form-control">
+                            <option {% if game.home_score == 0 %}selected{% endif %}>0</option>
+                            <option {% if game.home_score == 1 %}selected{% endif %}>1</option>
+                            <option {% if game.home_score == 2 %}selected{% endif %}>2</option>
+                            <option {% if game.home_score == 3 %}selected{% endif %}>3</option>
+                            <option {% if game.home_score == 4 %}selected{% endif %}>4</option>
+                        </select>
+                    {% else %}
+                        <span class="{% if game.home_team_advanced %}bold{% endif %}">
+                            {{ game.home_score }}
+                        </span>
+                    {% endif %}
                 </div>
                 -
                 <div class="score__team" data-bracket-index="{{ match_up.index }}"
@@ -47,13 +54,20 @@
                     <span class="{% if game.away_team_advanced %}bold{% endif %}">
                          {{ game.away_team.short|default:"TBD" }}
                     </span>
-                    <select class="score-select form-control">
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
+
+                    {% if edit_mode %}
+                        <select class="score-select form-control">
+                            <option {% if game.away_score == 0 %}selected{% endif %}>0</option>
+                            <option {% if game.away_score == 1 %}selected{% endif %}>1</option>
+                            <option {% if game.away_score == 2 %}selected{% endif %}>2</option>
+                            <option {% if game.away_score == 3 %}selected{% endif %}>3</option>
+                            <option {% if game.away_score == 4 %}selected{% endif %}>4</option>
+                        </select>
+                    {% else %}
+                        <span class="{% if game.away_team_advanced %}bold{% endif %}">
+                            {{ game.away_score }}
+                        </span>
+                    {% endif %}
                 </div>
             </li>
 
