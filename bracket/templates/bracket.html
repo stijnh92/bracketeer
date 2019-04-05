@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <a href="#" class="btn btn-primary">Edit</a>
+    <a href="#" class="btn btn-success save-button">Save changes</a>
 
     <main id="tournament" class="container">
         {% for round in bracket_items_left %}
@@ -28,4 +30,6 @@
         {% endfor %}
 
     </main>
+
+
 {% endblock %}
