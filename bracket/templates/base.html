@@ -18,41 +18,46 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <a class="navbar-brand" href="/">
-            <i class="fas fa-basketball-ball fa-spin-hover"></i> NBA Bracketeer
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <a class="navbar-brand" href="/">
+        <i class="fas fa-basketball-ball fa-spin-hover"></i> NBA Bracketeer
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/groups">Groups</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/leaderboard">Leaderboard</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0" action="/groups" method="GET">
-                <input class="form-control mr-sm-2" type="search" placeholder="Find a group..." aria-label="Search" name="group">
-                <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-            </form>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/groups">Groups</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/leaderboard">Leaderboard</a>
+            </li>
+        </ul>
 
-            {% if user.is_authenticated %}
-              Hi {{ user.username }}!
-              <p><a href="{% url 'logout' %}">logout</a></p>
-            {% else %}
-              <p>You are not logged in</p>
-              <a href="{% url 'login' %}">login</a>
-            {% endif %}
-        </div>
-    </nav>
+        <!--
+        <form class="form-inline my-2 my-lg-0" action="/groups" method="GET">
+            <input class="form-control mr-sm-2" type="search" placeholder="Find a group..." aria-label="Search" name="group">
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        -->
+
+        {% if not user.is_authenticated %}
+            <a href="{% url 'login' %}" class="btn btn-outline-info my-2 my-sm-0">
+                Login
+            </a>
+        {% else %}
+            <a href="{% url 'logout' %}" class="btn btn-outline-info my-2 my-sm-0">
+                Logout
+            </a>
+        {% endif %}
+    </div>
+</nav>
 
 {#    <div id="content">#}
-        {% block content %}{% endblock %}
+{% block content %}{% endblock %}
 {#    </div>#}
 </body>
 </html>

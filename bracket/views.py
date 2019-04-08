@@ -1,9 +1,13 @@
 import json
 
-from django.contrib.auth import authenticate
-from django.http import HttpResponseRedirect, JsonResponse
+from django.contrib.auth.forms import UserCreationForm
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.models import Group, User
+from django.urls import reverse_lazy
+from django.views import generic
 
 from bracket.models import BracketItem
 
@@ -41,4 +45,16 @@ def save_bracket(request):
         BracketItem.objects.set_match_up(request.user, key[1], key[0], match_up)
 
     return JsonResponse({'status': 'OK'})
-c
+
+
+@receiver(post_save, sender=User)
+def create_user_bracket(sender, instance, **kwargs):
+     print(instance)
+     print(sender)
+     print(kwargs)
+
+
+class Register(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'register.html'

@@ -23,4 +23,5 @@ urlpatterns = [
     path('bracket/<int:user_id>', views.bracket, name='user-bracket'),
     path('leaderboard', views.leaderboard),
     path('save-bracket', views.save_bracket),
+    path('register', views.Register.as_view(), name='register'),
 ]
