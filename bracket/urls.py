@@ -24,4 +24,5 @@ urlpatterns = [
     path('leaderboard', views.leaderboard),
     path('save-bracket', views.save_bracket),
     path('register', views.Register.as_view(), name='register'),
+    path('join/<int:group_id>', views.join_group, name='join-group'),
 ]

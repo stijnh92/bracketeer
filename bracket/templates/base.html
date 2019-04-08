@@ -32,9 +32,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/groups">Groups</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/leaderboard">Leaderboard</a>
-            </li>
+{#            <li class="nav-item">#}
+{#                <a class="nav-link" href="/leaderboard">Leaderboard</a>#}
+{#            </li>#}
         </ul>
 
         <!--
@@ -50,14 +50,13 @@
             </a>
         {% else %}
             <a href="{% url 'logout' %}" class="btn btn-outline-info my-2 my-sm-0">
-                Logout
+                Logout ({{ user.username }})
             </a>
         {% endif %}
     </div>
 </nav>
 
-{#    <div id="content">#}
 {% block content %}{% endblock %}
-{#    </div>#}
+
 </body>
 </html>

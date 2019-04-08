@@ -31,6 +31,8 @@ def bracket(request, user_id):
     user = User.objects.get(pk=user_id)
     bracket = BracketItem.objects.get_bracket(user)
     bracket['edit_mode'] = request.GET.get('edit', False)
+    bracket['bracket_user'] = user
+
     return render(request, 'bracket.html', bracket)
 
 
@@ -45,6 +47,13 @@ def save_bracket(request):
         BracketItem.objects.set_match_up(request.user, key[1], key[0], match_up)
 
     return JsonResponse({'status': 'OK'})
+
+
+def join_group(request, group_id):
+    group = Group.objects.get(pk=group_id)
+    group.user_set.add(request.user)
+
+    return group_detail(request, group_id)
 
 
 @receiver(post_save, sender=User)
