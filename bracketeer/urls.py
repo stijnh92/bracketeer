@@ -7,6 +7,7 @@ import debug_toolbar
 
 urlpatterns = [
     path('', include('bracket.urls')),
+    path('user/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

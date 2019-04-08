@@ -37,10 +37,8 @@ def leaderboard(request):
 def save_bracket(request):
     data = json.loads(request.body)
 
-    user = request.user
-    user = authenticate(username='stijn', password='W0nderfu!')
-
     for key, match_up in data.items():
-        BracketItem.objects.set_match_up(user, key[1], key[0], match_up)
+        BracketItem.objects.set_match_up(request.user, key[1], key[0], match_up)
 
     return JsonResponse({'status': 'OK'})
+c

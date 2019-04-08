@@ -40,6 +40,14 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Find a group..." aria-label="Search" name="group">
                 <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
             </form>
+
+            {% if user.is_authenticated %}
+              Hi {{ user.username }}!
+              <p><a href="{% url 'logout' %}">logout</a></p>
+            {% else %}
+              <p>You are not logged in</p>
+              <a href="{% url 'login' %}">login</a>
+            {% endif %}
         </div>
     </nav>
 
