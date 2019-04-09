@@ -14,17 +14,24 @@ class Team(models.Model):
 class MatchUpManager(models.Manager):
 
     def get_or_create(self, game, user):
-        home_team = Team.objects.get(short=game['home']['team'])
-        away_team = Team.objects.get(short=game['away']['team'])
+        home = game['home']
+        away = game['away']
+
+        home_team = Team.objects.get(short=home['team'])
+        away_team = Team.objects.get(short=away['team'])
 
         try:
-            return self.model.objects.get(home_team=home_team, away_team=away_team, user=user)
+            match_up = self.model.objects.get(home_team=home_team, away_team=away_team, user=user)
+            match_up.home_score = home['score']
+            match_up.away_score = away['score']
+            match_up.save()
+            return match_up
         except MatchUp.DoesNotExist:
             match_up = self.model.objects.create(
                 home_team=home_team,
                 away_team=away_team,
-                home_score=game['home']['score'],
-                away_score=game['away']['score'],
+                home_score=home['score'],
+                away_score=away['score'],
                 user=user
             )
             return match_up

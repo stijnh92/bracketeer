@@ -7,7 +7,13 @@
             <li class="list-group-item p-0">
 
                 {% if match_up.user %}
-                    <span class="badge badge-pill badge-success"> {{ match_up.points }}</span>
+                    {% if match_up.points == 10 %}
+                        <span class="badge badge-pill badge-success">{{ 10 }}</span>
+                    {% elif match_up.points == 5 %}
+                        <span class="badge badge-pill badge-danger">{{ 5 }}</span>
+                    {% else %}
+                        <span class="badge badge-pill badge-info">{{ 0 }}</span>
+                    {% endif %}
                 {% endif %}
 
                 <div class="card__team" data-bracket-index="{{ match_up.index }}"
