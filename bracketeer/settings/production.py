@@ -1,7 +1,5 @@
 from bracketeer.settings.base import *
 
-Debug = False
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
