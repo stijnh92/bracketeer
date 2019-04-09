@@ -6,6 +6,22 @@ from nba.models import MatchUp
 
 class BracketManager(models.Manager):
 
+    def create_new_bracket_for_user(self, user):
+        master_bracket_items = self.get_master_bracket_items()
+        for bracket_item in master_bracket_items:
+            match_up = bracket_item.match_up
+            match_up.pk = None
+            match_up.user = user
+            match_up.save()
+
+            bracket_item.pk = None
+            bracket_item.user = user
+            bracket_item.match_up = match_up
+            bracket_item.save()
+
+    def get_master_bracket_items(self):
+        return [self.get_item(index, side) for index in range(1, 5) for side in ['L', 'R']]
+
     def get_bracket(self, user=None):
         return {
             'bracket_items_left': self.get_side_bracket('L', user),

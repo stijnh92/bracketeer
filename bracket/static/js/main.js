@@ -66,7 +66,8 @@ $(document).ready(function () {
                 'X-CSRFToken': getCookie('csrftoken')
             }
         }).done(function() {
-            window.location.href = "/bracket/1";
+            // location.reload();
+            location.href = location.origin + location.pathname;
         });
     });
 

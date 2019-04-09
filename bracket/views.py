@@ -58,9 +58,8 @@ def join_group(request, group_id):
 
 @receiver(post_save, sender=User)
 def create_user_bracket(sender, instance, **kwargs):
-     print(instance)
-     print(sender)
-     print(kwargs)
+    if kwargs.get('created', False):
+        BracketItem.objects.create_new_bracket_for_user(instance)
 
 
 class Register(generic.CreateView):
