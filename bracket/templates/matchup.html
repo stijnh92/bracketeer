@@ -5,14 +5,13 @@
         {% with match_up.match_up as game %}
 
             <li class="list-group-item p-0">
-
-                {% if match_up.user %}
-                    {% if match_up.points == 10 %}
-                        <span class="badge badge-pill badge-success">{{ 10 }}</span>
-                    {% elif match_up.points == 5 %}
-                        <span class="badge badge-pill badge-danger">{{ 5 }}</span>
+                {% if not edit_mode and match_up.user and match_up.finished %}
+                    {% if match_up.points == match_up.get_max_points %}
+                        <span class="badge badge-pill badge-success">{{ match_up.points }}</span>
+                    {% elif match_up.points == match_up.get_min_points %}
+                        <span class="badge badge-pill badge-info">{{ match_up.points }}</span>
                     {% else %}
-                        <span class="badge badge-pill badge-info">{{ 0 }}</span>
+                        <span class="badge badge-pill badge-danger">{{ 0 }}</span>
                     {% endif %}
                 {% endif %}
 

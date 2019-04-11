@@ -14,6 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
+from django.views.generic import TemplateView
+
 from . import views
 
 urlpatterns = [
@@ -23,6 +25,7 @@ urlpatterns = [
     path('bracket/<int:user_id>', views.bracket, name='user-bracket'),
     path('leaderboard', views.leaderboard),
     path('save-bracket', views.save_bracket),
+    path('help', TemplateView.as_view(template_name='help.html')),
     path('register', views.Register.as_view(), name='register'),
     path('join/<int:group_id>', views.join_group, name='join-group'),
 ]

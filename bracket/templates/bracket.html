@@ -2,44 +2,51 @@
 
 {% block content %}
 
-    {% if bracket_user %}
-        <h1>{{ bracket_user }}</h1>
-    {% endif %}
+    <div class="container">
 
-    {% if edit_mode %}
-        <a href="#" class="btn btn-success save-button">Save changes</a>
-    {% endif %}
+        <div class="row">
+            {% if bracket_user %}
+                <h1>{{ bracket_user }}</h1>
+            {% endif %}
+        </div>
+        <div class="row">
+            {% if edit_mode %}
+                <a href="#" class="btn btn-success save-button">Save changes</a>
+            {% endif %}
 
-    {% if not edit_mode and user.is_authenticated and user == bracket_user %}
-        <a href="{% url 'user-bracket' user.id %}?edit=1" class="btn btn-primary">Edit your bracket</a>
-    {% endif %}
+            {% if not edit_mode and user.is_authenticated and user == bracket_user %}
+                <a href="{% url 'user-bracket' user.id %}?edit=1" class="btn btn-primary">Edit your bracket</a>
+            {% endif %}
+        </div>
 
-    <main id="tournament" class="container">
-        {% for round in bracket_items_left %}
-            <ul class="round p-3">
-                <li class="spacer"></li>
-                {% for match_up in round %}
-                    {% include "matchup.html" with match_up=match_up %}
+
+        <main id="tournament">
+            {% for round in bracket_items_left %}
+                <ul class="round p-3">
                     <li class="spacer"></li>
-                {% endfor %}
+                    {% for match_up in round %}
+                        {% include "matchup.html" with match_up=match_up %}
+                        <li class="spacer"></li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+
+            <ul class="round p-5">
+                {% include "matchup.html" with match_up=final_bracket_item %}
             </ul>
-        {% endfor %}
 
-        <ul class="round p-5">
-             {% include "matchup.html" with match_up=final_bracket_item %}
-        </ul>
-
-        {% for round in bracket_items_right %}
-            <ul class="round p-3">
-                <li class="spacer"></li>
-                {% for match_up in round %}
-                    {% include "matchup.html" with match_up=match_up %}
+            {% for round in bracket_items_right %}
+                <ul class="round p-3">
                     <li class="spacer"></li>
-                {% endfor %}
-            </ul>
-        {% endfor %}
+                    {% for match_up in round %}
+                        {% include "matchup.html" with match_up=match_up %}
+                        <li class="spacer"></li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
 
-    </main>
+        </main>
+    </div>
 
 
 {% endblock %}

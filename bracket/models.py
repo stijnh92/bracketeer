@@ -58,6 +58,33 @@ class BracketItem(models.Model):
     side = models.CharField(max_length=1)
     index = models.IntegerField()
     points = models.IntegerField(default=0)
+    finished = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    base_points = 10
+    bonus_points = 5
+
+    def get_max_points(self):
+        max_points = self.base_points + self.bonus_points
+        if self.side == 'F':
+            return max_points * 8
+
+        if self.index in (1, 2, 3, 4):
+            return max_points
+        if self.index in (5, 6):
+            return max_points * 2
+        elif self.index == 7:
+            return max_points * 4
+
+    def get_min_points(self):
+        if self.side == 'F':
+            return self.base_points * 8
+
+        if self.index in (1, 2, 3, 4):
+            return self.base_points
+        if self.index in (5, 6):
+            return self.base_points * 2
+        elif self.index == 7:
+            return self.base_points * 4
 
     objects = BracketManager()
