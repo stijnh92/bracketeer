@@ -1,5 +1,7 @@
 from bracketeer.settings.base import *
 
+DEBUG = False
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -14,3 +16,5 @@ DATABASES = {
 SECRET_KEY = os.environ['SECRET_KEY']
 
 INTERNAL_IPS = ['127.0.0.1']
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
