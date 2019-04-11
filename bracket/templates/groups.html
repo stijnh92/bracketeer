@@ -19,10 +19,13 @@
                             <a href="/group/{{ group.id }}"> {{ group.name }} </a>
                         </td>
                         <td>
-                            1
+                            {{ group.user_set.count }}
                         </td>
                         <td>
-                            <i class="fas fa-users"></i> public, join <a href="{% url 'join-group' group.id %}">here!</a>
+                            <i class="fas fa-users"></i> public
+                            {% if user.is_authenticated %}
+                                , join <a href="{% url 'join-group' group.id %}">here!</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
