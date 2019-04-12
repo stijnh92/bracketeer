@@ -69,6 +69,16 @@ def save_bracket(request):
     return JsonResponse({'status': 'OK'})
 
 
+def create_group(request):
+    try:
+        Group.objects.create(name=request.POST['name'])
+    except:
+        print('Group could not be created!')
+        print(request.POST)
+    finally:
+        return group_list(request)
+
+
 def join_group(request, group_id):
     group = Group.objects.get(pk=group_id)
     group.user_set.add(request.user)

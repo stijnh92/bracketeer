@@ -13,23 +13,40 @@
             </thead>
 
             <tbody>
-                {% for group in group_list %}
-                    <tr>
-                        <td>
-                            <a href="/group/{{ group.id }}"> {{ group.name }} </a>
-                        </td>
-                        <td>
-                            {{ group.user_set.count }}
-                        </td>
-                        <td>
+            {% for group in group_list %}
+                <tr>
+                    <td>
+                        <a href="/group/{{ group.id }}"> {{ group.name }} </a>
+                    </td>
+                    <td>
+                        {{ group.user_set.count }}
+                    </td>
+                    <td>
+                        {% if user in group.user_set.all %}
+                            <i class="fas fa-check"></i> Already in this group
+                        {% else %}
                             <i class="fas fa-users"></i> public
                             {% if user.is_authenticated %}
                                 , join <a href="{% url 'join-group' group.id %}">here!</a>
                             {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
+
+        <hr/>
+        <h5>Your group not in this list? Create a new one here!</h5>
+        <div style="width: 300px;">
+            <form action="/group" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text" class="form-control"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
 {% endblock %}

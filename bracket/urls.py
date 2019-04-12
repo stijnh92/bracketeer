@@ -21,6 +21,7 @@ from . import views
 urlpatterns = [
     path('', views.index),
     path('groups', views.group_list),
+    path('group', views.create_group),
     path('group/<int:group_id>', views.group_detail),
     path('bracket/<int:user_id>', views.bracket, name='user-bracket'),
     path('leaderboard', views.leaderboard),
