@@ -13,7 +13,7 @@
                 </thead>
 
                 <tbody>
-                    {% for user in group.user_set.all %}
+                    {% for user in users %}
                         <tr>
                             <td>
                                 <a href="/bracket/{{ user.id }}"> {{ user.username }} </a>
@@ -22,7 +22,12 @@
                                 0
                             </td>
                             <td>
-                                TBD
+                                {% if user.finals_match_up %}
+                                    <span class="font-weight-bold">{{ user.finals_match_up.winner.name }}</span>
+                                    <span class="font-italic">(vs {{ user.finals_match_up.loser.name }} in {{ user.finals_match_up.games }} games)</span>
+                                {% else %}
+                                    TBD
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}

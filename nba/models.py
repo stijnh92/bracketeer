@@ -56,4 +56,16 @@ class MatchUp(models.Model):
     def away_team_advanced(self):
         return self.away_score == 4
 
+    def get_winner(self):
+        if self.home_team_advanced():
+            return self.home_team
+        elif self.away_team_advanced():
+            return self.away_team
+
+    def get_loser(self):
+        if self.home_team_eliminated():
+            return self.home_team
+        elif self.away_team_eliminated():
+            return self.away_team
+
     objects = MatchUpManager()

@@ -24,7 +24,27 @@ def group_list(request):
 
 def group_detail(request, group_id):
     group = Group.objects.get(pk=group_id)
-    return render(request, 'group_detail.html', {'group': group})
+    users = group.user_set.all()
+
+    for user in users:
+        user.finals_match_up = None
+
+        # Get the final bracket for this user.
+        bracket_item = BracketItem.objects.get_item('1', 'M', user)
+
+        if bracket_item.id and bracket_item.match_up:
+            finals = bracket_item.match_up
+            user.finals_match_up = {
+                'winner': finals.get_winner(),
+                'loser': finals.get_loser(),
+                'games': finals.home_score + finals.away_score
+            }
+            print(user.finals_match_up)
+
+    return render(request, 'group_detail.html', {
+        'group': group,
+        'users': users
+    })
 
 
 def bracket(request, user_id):
