@@ -13,10 +13,10 @@
             {% if edit_mode %}
                 <a href="#" class="btn btn-success save-button">Save changes</a>
             {% endif %}
-
-            {% if not edit_mode and user.is_authenticated and user == bracket_user %}
-                <a href="{% url 'user-bracket' user.id %}?edit=1" class="btn btn-primary">Edit your bracket</a>
-            {% endif %}
+{#Disable bracket edit mode#}
+{#            {% if not edit_mode and user.is_authenticated and user == bracket_user %}#}
+{#                <a href="{% url 'user-bracket' user.id %}?edit=1" class="btn btn-primary">Edit your bracket</a>#}
+{#            {% endif %}#}
         </div>
 
 
