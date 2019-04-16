@@ -1,3 +1,4 @@
+from datetime import date, timedelta
 import requests
 
 from django.core.management.base import BaseCommand, CommandError
@@ -29,8 +30,10 @@ class Command(BaseCommand):
     def get_match_up_standings(self):
         result = []
 
-        self.stdout.write(self.style.SUCCESS('Fetching all games of today.'))
-        scoreboard_url = 'http://data.nba.net/10s/prod/v1/20190414/scoreboard.json'
+        today = date.strftime(date.today() - timedelta(1), '%Y%m%d')
+        self.stdout.write(self.style.SUCCESS(f"Fetching all of yesterday's games..."))
+        scoreboard_url = f'http://data.nba.net/10s/prod/v1/{today}/scoreboard.json'
+        self.stdout.write(f'Using scoreboard URL {scoreboard_url}')
 
         request = requests.get(scoreboard_url)
         scoreboard = request.json()
@@ -56,6 +59,11 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS('Found %s games: ' % len(result)))
         for game in result:
-            self.stdout.write('%s @ %s' % (game['away_team'], game['home_team']))
+            self.stdout.write(
+                '%s @ %s (%s - %s)' % (
+                    game['away_team'], game['home_team'],
+                    game['home_score'], game['away_score']
+                )
+            )
 
         return result
