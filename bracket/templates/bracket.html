@@ -13,10 +13,10 @@
             {% if edit_mode %}
                 <a href="#" class="btn btn-success save-button">Save changes</a>
             {% endif %}
-{#Disable bracket edit mode#}
-{#            {% if not edit_mode and user.is_authenticated and user == bracket_user %}#}
-{#                <a href="{% url 'user-bracket' user.id %}?edit=1" class="btn btn-primary">Edit your bracket</a>#}
-{#            {% endif %}#}
+            {#Disable bracket edit mode#}
+            {#            {% if not edit_mode and user.is_authenticated and user == bracket_user %}#}
+            {#                <a href="{% url 'user-bracket' user.id %}?edit=1" class="btn btn-primary">Edit your bracket</a>#}
+            {#            {% endif %}#}
         </div>
 
 
@@ -46,7 +46,12 @@
             {% endfor %}
 
         </main>
-    </div>
 
+        {% if final_bracket_item and final_bracket_item.match_up %}
+            <div class="row">
+                <h3>2019 NBA champions: {{ final_bracket_item.match_up.get_winner.name }}</h3>
+            </div>
+        {% endif %}
+    </div>
 
 {% endblock %}
