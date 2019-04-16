@@ -1,8 +1,8 @@
 {% load static %}
 
-<div class="card" style="width: 150px;">
-    <ul class="list-group list-group-flush">
-        {% with match_up.match_up as game %}
+{% with match_up.match_up as game %}
+    <div class="card" style="width: 150px; {% if not edit_mode and not game.home_team and not game.away_team %}opacity: 0.6{% endif %}">
+        <ul class="list-group list-group-flush">
 
             <li class="list-group-item p-0">
                 {% if not edit_mode and match_up.user and match_up.finished %}
@@ -94,8 +94,9 @@
                 </div>
             </li>
 
-        {% endwith %}
 
-    </ul>
-</div>
+        </ul>
+    </div>
+{% endwith %}
+
 {{ end }}
