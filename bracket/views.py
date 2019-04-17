@@ -1,5 +1,6 @@
 import json
 
+from django.template.defaulttags import register
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -39,7 +40,6 @@ def group_detail(request, group_id):
                 'loser': finals.get_loser(),
                 'games': finals.home_score + finals.away_score
             }
-            print(user.finals_match_up)
 
     return render(request, 'group_detail.html', {
         'group': group,
@@ -52,8 +52,26 @@ def bracket(request, user_id):
     bracket = BracketItem.objects.get_bracket(user)
     bracket['edit_mode'] = request.GET.get('edit', False)
     bracket['bracket_user'] = user
+    bracket['actual_bracket'] = get_flattened_master_bracket()
 
     return render(request, 'bracket.html', bracket)
+
+
+def get_flattened_master_bracket():
+    results = {}
+    master_bracket = BracketItem.objects.get_bracket()
+
+    for bracket_side, games_per_round in master_bracket.items():
+        if bracket_side == 'final_bracket_item':
+            final_game = games_per_round
+            if final_game.id:
+                results[final_game.side + str(final_game.index)] = final_game
+        else:
+            for games in games_per_round:
+                for game in games:
+                    if game.id:
+                        results[game.side + str(game.index)] = game.match_up
+    return results
 
 
 def leaderboard(request):
@@ -96,3 +114,9 @@ class Register(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'register.html'
+
+
+@register.filter
+def get_item(dictionary, bracket_item):
+    key = '%s%s' % (bracket_item.side, bracket_item.index)
+    return dictionary.get(key)

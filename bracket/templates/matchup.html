@@ -1,7 +1,8 @@
 {% load static %}
 
 {% with match_up.match_up as game %}
-    <div class="card" style="width: 150px; {% if not edit_mode and not game.home_team and not game.away_team %}opacity: 0.6{% endif %}">
+    <div class="card"
+         style="width: 150px; {% if not edit_mode and not game.home_team and not game.away_team %}opacity: 0.6{% endif %}">
         <ul class="list-group list-group-flush">
 
             <li class="list-group-item p-0">
@@ -75,6 +76,34 @@
                     {% endif %}
                 </div>
             </li>
+
+            {% with actual_bracket|get_item:match_up as actual_game %}
+                {% if actual_game %}
+
+                    <li class="list-group-item p-1 text-center live-score">
+                        <div class="score__team" data-bracket-index="{{ match_up.index }}"
+                             data-bracket-side="{{ match_up.side }}" data-location="home">
+                            <span class="{% if actual_game.home_team_advanced %}bold{% endif %}">
+                                {{ actual_game.home_team.short|default:"TBD" }}
+                            </span>
+
+                            <span class="{% if actual_game.home_team_advanced %}bold{% endif %}">
+                            {{ actual_game.home_score }}
+                            </span>
+                        </div>
+                        -
+                        <div class="score__team" data-bracket-index="{{ match_up.index }}"
+                             data-bracket-side="{{ match_up.side }}" data-location="away">
+                            <span class="{% if actual_game.away_team_advanced %}bold{% endif %}">
+                                 {{ actual_game.away_team.short|default:"TBD" }}
+                            </span>
+                            <span class="{% if actual_game.away_team_advanced %}bold{% endif %}">
+                                {{ actual_game.away_score }}
+                            </span>
+                        </div>
+                    </li>
+                {% endif %}
+            {% endwith %}
 
 
             <li class="list-group-item p-0">

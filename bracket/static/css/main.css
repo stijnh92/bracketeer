@@ -221,3 +221,12 @@ a {
     display: inline;
     padding: 0 0;
 }
+
+.live-score {
+    display: none;
+    color: blue;
+}
+
+.btn-compare-live-hide {
+    display: none;
+}

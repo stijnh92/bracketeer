@@ -71,6 +71,21 @@ $(document).ready(function () {
         });
     });
 
+    $(".btn-compare-live-show").click(function () {
+        $('.live-score').css('display', 'block');
+        $('.btn-compare-live-show').css('display', 'none');
+        $('.btn-compare-live-hide').css('display', 'block');
+
+    });
+
+    $(".btn-compare-live-hide").click(function () {
+        $('.live-score').css('display', 'none');
+        $('.btn-compare-live-hide').css('display', 'none');
+        $('.btn-compare-live-show').css('display', 'block');
+
+    });
+
+
     function getTeamCard(side, index, location) {
         return $(
             "div[data-bracket-side=" + side +
