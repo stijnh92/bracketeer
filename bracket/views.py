@@ -15,6 +15,7 @@ from bracket.models import BracketItem
 
 def index(request):
     bracket = BracketItem.objects.get_bracket()
+    bracket['actual_bracket'] = {}
     return render(request, 'bracket.html', bracket)
 
 
