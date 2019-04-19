@@ -66,7 +66,7 @@ class Command(BaseCommand):
             self.stdout.write(
                 '%s @ %s (%s - %s)' % (
                     game['away_team'], game['home_team'],
-                    game['home_score'], game['away_score']
+                    game['away_score'], game['home_score']
                 )
             )
 
