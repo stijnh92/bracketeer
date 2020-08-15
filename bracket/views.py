@@ -1,5 +1,7 @@
 import json
+import operator
 
+from django.db.models import Sum
 from django.template.defaulttags import register
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models.signals import post_save
@@ -26,9 +28,14 @@ def group_list(request):
 
 def group_detail(request, group_id):
     group = Group.objects.get(pk=group_id)
-    users = group.user_set.all()
+    users = BracketItem.objects.filter(user__groups=group)\
+        .values('user')\
+        .annotate(sum_points=Sum('points')).order_by('-sum_points')
 
-    for user in users:
+    user_list = []
+    for user_points in users:
+        user = User.objects.get(pk=user_points['user'])
+        user.points = user_points['sum_points']
         user.finals_match_up = None
 
         # Get the final bracket for this user.
@@ -42,9 +49,11 @@ def group_detail(request, group_id):
                 'games': finals.home_score + finals.away_score
             }
 
+        user_list.append(user)
+
     return render(request, 'group_detail.html', {
         'group': group,
-        'users': users
+        'users': user_list
     })
 
 
@@ -53,6 +62,7 @@ def bracket(request, user_id):
     bracket = BracketItem.objects.get_bracket(user)
     bracket['edit_mode'] = request.GET.get('edit', False)
     bracket['bracket_user'] = user
+    bracket['bracket_points'] = BracketItem.objects.filter(user=user).aggregate(Sum('points'))['points__sum']
     bracket['actual_bracket'] = get_flattened_master_bracket()
 
     return render(request, 'bracket.html', bracket)

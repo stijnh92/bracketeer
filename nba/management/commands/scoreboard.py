@@ -45,16 +45,20 @@ class Command(BaseCommand):
             # Check which one of the teams is the lowest seed to determine the match up's home team.
             if playoff_home['seedNum'] < playoff_away['seedNum']:
                 match_up_home_short = game['hTeam']['triCode']
+                home_score = playoff_home['seriesWin']
                 match_up_away_short = game['vTeam']['triCode']
+                away_score = playoff_away['seriesWin']
             else:
                 match_up_home_short = game['vTeam']['triCode']
+                home_score = playoff_away['seriesWin']
                 match_up_away_short = game['hTeam']['triCode']
+                away_score = playoff_home['seriesWin']
 
             result.append({
                 'home_team': Team.objects.get(short=match_up_home_short),
                 'away_team': Team.objects.get(short=match_up_away_short),
-                'home_score': playoff_home['seriesWin'],
-                'away_score': playoff_away['seriesWin']
+                'home_score': home_score,
+                'away_score': away_score
             })
 
         self.stdout.write(self.style.SUCCESS('Found %s games: ' % len(result)))
@@ -62,7 +66,7 @@ class Command(BaseCommand):
             self.stdout.write(
                 '%s @ %s (%s - %s)' % (
                     game['away_team'], game['home_team'],
-                    game['home_score'], game['away_score']
+                    game['away_score'], game['home_score']
                 )
             )
 
