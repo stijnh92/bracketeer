@@ -6,16 +6,9 @@
 
         <div class="row">
             {% if bracket_user %}
-<<<<<<< HEAD
-                <h2>Bracket of {{ bracket_user }} (0 points)</h2>
-
+                <h2>Bracket of {{ bracket_user }} ({{ bracket_points }} points)</h2>
             {% else %}
                 <h2>2020 NBA Playoffs</h2>
-=======
-                <h2>Bracket of {{ bracket_user }} ({{ bracket_points }} points)</h2>
-            {%  else %}
-                <h2>2019 NBA Playoffs</h2>
->>>>>>> 4a0a48389e0e0feeb3e5cd3cbe1319829afa1488
             {% endif %}
         </div>
         {% if final_bracket_item and final_bracket_item.match_up %}
@@ -61,9 +54,7 @@
 
         {% if bracket_user %}
             <div class="row">
-
                 <div class="col-md-12">
-
                     <a href="#" class="btn btn-outline-info btn-compare-live-show">
                         <i class="fa fa-eye"></i> Show actual standings
                     </a>
@@ -71,7 +62,6 @@
                         <i class="fa fa-eye-slash"></i> Hide actual standings
                     </a>
                 </div>
-
             </div>
         {% endif %}
 
