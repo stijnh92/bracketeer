@@ -7,30 +7,23 @@
         <div class="row">
             {% if bracket_user %}
                 <h2>Bracket of {{ bracket_user }} (0 points)</h2>
-            {%  else %}
-                <h2>2019 NBA Playoffs</h2>
+
+            {% else %}
+                <h2>2020 NBA Playoffs</h2>
             {% endif %}
         </div>
         {% if final_bracket_item and final_bracket_item.match_up %}
             <div class="row">
-                <h3>2019 NBA champions: {{ final_bracket_item.match_up.get_winner.name }}</h3>
+                <h3>2020 NBA champions: {{ final_bracket_item.match_up.get_winner.name }}</h3>
             </div>
         {% endif %}
         <div class="row">
+            {% if not edit_mode and user.is_authenticated and user == bracket_user %}
+                <a href="{% url 'user-bracket' user.id %}?edit=1" class="btn btn-info">Edit</a>
+            {% endif %}
             {% if edit_mode %}
                 <a href="#" class="btn btn-success save-button">Save changes</a>
             {% endif %}
-            {% if bracket_user %}
-                <a href="#" class="btn btn-outline-info btn-compare-live-show"><i class="fa fa-eye"></i> Show actual
-                    standings</a>
-                <a href="#" class="btn btn-outline-secondary btn-compare-live-hide"><i class="fa fa-eye-slash"></i> Hide
-                    actual standings</a>
-            {% endif %}
-
-            {#Disable bracket edit mode#}
-            {#            {% if not edit_mode and user.is_authenticated and user == bracket_user %}#}
-            {#                <a href="{% url 'user-bracket' user.id %}?edit=1" class="btn btn-primary">Edit your bracket</a>#}
-            {#            {% endif %}#}
         </div>
 
 
@@ -59,6 +52,24 @@
                 </ul>
             {% endfor %}
         </main>
+
+        {% if bracket_user %}
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <a href="#" class="btn btn-outline-info btn-compare-live-show">
+                        <i class="fa fa-eye"></i> Show actual standings
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary btn-compare-live-hide">
+                        <i class="fa fa-eye-slash"></i> Hide actual standings
+                    </a>
+                </div>
+
+            </div>
+        {% endif %}
+
+
     </div>
 
 {% endblock %}

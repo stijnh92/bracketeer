@@ -230,3 +230,7 @@ a {
 .btn-compare-live-hide {
     display: none;
 }
+
+.btn-compare-live-show {
+    display: block
+}

@@ -21,6 +21,7 @@
                     {% if game %}
                         <img src="{% static 'img/'|add:game.home_team.logo %}"
                              alt="{{ game.home_team.short|default_if_none:"TBD"}}"
+                             title="{{ game.home_team.name|default_if_none:"TBD"}}"
                              style="{% if game.home_team_eliminated %} opacity: 0.30; {% endif %}"
                         />
                     {% else %}
@@ -111,7 +112,9 @@
                      data-bracket-side="{{ match_up.side }}" data-location="away">
                     {% if game %}
                         <img src="{% static 'img/'|add:game.away_team.logo %}"
-                             alt="{{ game.away_team.short }}"
+                             alt="{{ game.away_team.short|default_if_none:"TBD"}}"
+                             title="{{ game.away_team.name|default_if_none:"TBD"}}"
+
                              style="{% if game.away_team_eliminated %} opacity: 0.30; {% endif %}"
                         />
                     {% else %}
