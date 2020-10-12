@@ -66,7 +66,7 @@ class BracketItem(models.Model):
 
     def get_max_points(self):
         max_points = self.base_points + self.bonus_points
-        if self.side == 'F':
+        if self.side == 'M':
             return max_points * 8
 
         if self.index in (1, 2, 3, 4):
@@ -77,7 +77,7 @@ class BracketItem(models.Model):
             return max_points * 4
 
     def get_min_points(self):
-        if self.side == 'F':
+        if self.side == 'M':
             return self.base_points * 8
 
         if self.index in (1, 2, 3, 4):
